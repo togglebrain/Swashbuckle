@@ -19,6 +19,7 @@ namespace Swashbuckle.Tests.Swagger
         public void SetUp()
         {
             SetUpDefaultRouteFor<SwaggerAnnotatedController>();
+            SetUpDefaultRouteFor<ResponseSamplesController>();
 
             // Default set-up
             SetUpHandler();

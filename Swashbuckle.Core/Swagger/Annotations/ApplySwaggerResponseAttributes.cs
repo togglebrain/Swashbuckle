@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http.Description;
@@ -10,7 +9,7 @@ namespace Swashbuckle.Swagger.Annotations
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
-            if (apiDescription.GetControllerAndActionAttributes<SwaggerResponseRemoveDefaultsAttribute>().Any()) 
+            if (apiDescription.GetControllerAndActionAttributes<SwaggerResponseRemoveDefaultsAttribute>().Any())
                 operation.responses.Clear();
 
             var responseAttributes = apiDescription.GetControllerAndActionAttributes<SwaggerResponseAttribute>()
@@ -23,7 +22,8 @@ namespace Swashbuckle.Swagger.Annotations
                 operation.responses[statusCode] = new Response
                 {
                     description = attr.Description ?? InferDescriptionFrom(statusCode),
-                    schema = (attr.Type != null) ? schemaRegistry.GetOrRegister(attr.Type) : null
+                    schema = (attr.Type != null) ? schemaRegistry.GetOrRegister(attr.Type) : null,
+                    examples = attr.Example
                 };
             }
         }
